@@ -29,6 +29,7 @@ jobs
 	treatment
 	duty
 	requirement
+	person_number
 	
 job_categories
 	jc_id
