@@ -1,0 +1,46 @@
+companies
+	company_id
+	name
+	description
+	address
+	map_url
+
+company_contactuser_rel
+	id
+	company_id
+	uid
+	
+contact_users
+	uid
+	username
+	email
+	qq
+	gtalk
+	msn
+	address
+	cellphone
+	phone
+
+jobs
+	job_id
+	title
+	address
+	pay
+	treatment
+	duty
+	requirement
+	
+job_categories
+	jc_id
+	name
+	description
+
+job_category_rel
+	id
+	job_id
+	jc_id
+	
+company_job_rel
+	id
+	company_id
+	job_id
