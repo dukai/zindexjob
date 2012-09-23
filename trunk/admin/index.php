@@ -5,7 +5,7 @@
 	<div class="row-fluid">
 		<?include "sidebar.php";?>
 
-		<div class="span8">
+		<div class="span10">
 			<div class="hero-unit">
 				<h1>欢迎使用</h1>
 				<p>欢迎使用zIndex工作管理系统</p>

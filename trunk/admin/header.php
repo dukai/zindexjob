@@ -9,6 +9,6 @@
 
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">zIndex Jobs 管理系统</a>
+    <a class="brand" href="index.php">zIndex Jobs 管理系统</a>
   </div>
 </div>

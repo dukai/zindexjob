@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Shanghai');
 
 $config = array(
 	'host' => 'localhost',
-	'db' => 'quran_db',
+	'db' => 'zindexjob_db',
 	'port' => '3306',
 	'username' => 'root',
 	'password' => '1'
