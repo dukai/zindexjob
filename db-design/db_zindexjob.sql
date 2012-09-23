@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 20, 2012 at 10:06 AM
+-- Generation Time: Sep 23, 2012 at 01:55 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `db_zindexjob`
+-- Database: `zindexjob_db`
 --
 
 -- --------------------------------------------------------
@@ -31,8 +31,12 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `address` varchar(255) NOT NULL,
   `map_url` varchar(255) NOT NULL,
   `name` varchar(100) NOT NULL,
+  `created_time` datetime NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `fax` varchar(20) NOT NULL,
+  `zipcode` varchar(10) NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -76,6 +80,7 @@ CREATE TABLE IF NOT EXISTS `contact_users` (
   `address` varchar(255) NOT NULL,
   `cellphone` varchar(20) NOT NULL,
   `phone` varchar(20) NOT NULL,
+  `created_time` datetime NOT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -93,7 +98,8 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `treatment` int(11) NOT NULL COMMENT '待遇',
   `duty` int(11) NOT NULL COMMENT '职责',
   `requirement` int(11) NOT NULL COMMENT '要求',
-  `person_number` varchar(100) NOT NULL
+  `person_number` varchar(100) NOT NULL,
+  `created_time` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

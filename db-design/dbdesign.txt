@@ -4,6 +4,10 @@ companies
 	description
 	address
 	map_url
+	phone
+	fax
+	zipcode
+	created_time
 
 company_contactuser_rel
 	id
@@ -20,6 +24,7 @@ contact_users
 	address
 	cellphone
 	phone
+	created_time
 
 jobs
 	job_id
@@ -30,6 +35,7 @@ jobs
 	duty
 	requirement
 	person_number
+	created_time
 	
 job_categories
 	jc_id
