@@ -33,7 +33,7 @@ $users = $db->fetchAll("select cu.*, c.name as company_name from contact_users a
 				</div>
 				
 				<table class="table table-striped">
-					<tr><th width="30"><input type="checkbox" /></th><th width="100">#</th><th>联系人</th><th>公司</th><th width="150">创建时间</th><th width="150">操作</th></tr>
+					<tr><th width="30"><input type="checkbox" /></th><th width="60">#</th><th>联系人</th><th>公司</th><th width="150">创建时间</th><th width="150">操作</th></tr>
 					<?foreach($users as $key=>$value){?>
 					<tr><td><input type="checkbox" /></td><td><?=$value['uid']?></td><td><?=$value['username']?></td><td><?=$value['company_name']?></td><td><?=$value['created_time']?></td><td><div class="btn-group"><a href="#" class="btn btn-primary btn-small">修改</a><a href="#" class="btn btn-danger btn-small">删除</a></div></td></tr>
 					<?}?>
