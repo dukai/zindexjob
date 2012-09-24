@@ -25,13 +25,13 @@
 				工作管理
 			  </a>
 			</div>
-			<div id="collapseTwo" class="accordion-body collapse">
+			<div id="collapseTwo" class="accordion-body collapse in">
 				<div class="accordion-inner">
 				  <ul class="nav nav-pills nav-stacked">
-					<li><a href="#">创建工作</a></a></li>
-					<li><a href="#">创建工作分类</a></a></li>
-					<li><a href="#">工作管理</a></a></li>
-					<li><a href="#">工作分类管理</a></a></li>
+					<li><a href="job-create.php">创建工作</a></a></li>
+					<li><a href="job-category-create.php">创建工作分类</a></a></li>
+					<li><a href="job-manage.php">工作管理</a></a></li>
+					<li><a href="job-category-manage.php">工作分类管理</a></a></li>
 				</ul>
 				</div>
 			</div>
@@ -39,6 +39,5 @@
 		  
 		</div>
 		
-		<div class="tooltip fade top in"><div class="tooltip-arrow"></div><div class="tooltip-inner">Tooltip on top</div></div>
 	</div>
 </div>
