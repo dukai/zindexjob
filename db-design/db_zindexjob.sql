@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 23, 2012 at 02:19 PM
+-- Generation Time: Sep 24, 2012 at 10:18 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `fax` varchar(20) NOT NULL,
   `zipcode` varchar(10) NOT NULL,
   PRIMARY KEY (`company_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `company_contactuser_rel` (
   `uid` int(11) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `company_job_rel` (
   `company_id` int(11) NOT NULL,
   `job_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `contact_users` (
   `phone` varchar(20) NOT NULL,
   `created_time` datetime NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -85,16 +85,17 @@ CREATE TABLE IF NOT EXISTS `contact_users` (
 --
 
 CREATE TABLE IF NOT EXISTS `jobs` (
-  `job_id` int(11) NOT NULL,
-  `title` int(11) NOT NULL,
-  `address` int(11) NOT NULL,
-  `pay` int(11) NOT NULL COMMENT '工资',
-  `treatment` int(11) NOT NULL COMMENT '待遇',
-  `duty` int(11) NOT NULL COMMENT '职责',
-  `requirement` int(11) NOT NULL COMMENT '要求',
+  `job_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `pay` varchar(20) NOT NULL COMMENT '工资',
+  `treatment` text NOT NULL COMMENT '待遇',
+  `duty` text NOT NULL COMMENT '职责',
+  `requirement` text NOT NULL COMMENT '要求',
   `person_number` varchar(100) NOT NULL,
-  `created_time` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `created_time` datetime NOT NULL,
+  PRIMARY KEY (`job_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -103,10 +104,11 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 --
 
 CREATE TABLE IF NOT EXISTS `job_categories` (
-  `jc_id` int(11) NOT NULL,
+  `jc_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `description` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`jc_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -119,4 +121,4 @@ CREATE TABLE IF NOT EXISTS `job_category_rel` (
   `job_id` int(11) NOT NULL,
   `jc_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
