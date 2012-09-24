@@ -13,8 +13,9 @@
 			  <ul class="nav nav-pills nav-stacked">
 				<li><a href="company-create.php">创建公司</a></a></li>
 				<li><a href="company-manage.php">公司管理</a></a></li>
-				<li><a href="contactuser-manage.php">联系人管理</a></a></li>
+				
 				<li><a href="contactuser-create.php">创建联系人</a></a></li>
+				<li><a href="contactuser-manage.php">联系人管理</a></a></li>
 			</ul>
 			</div>
 			</div>
@@ -29,8 +30,9 @@
 				<div class="accordion-inner">
 				  <ul class="nav nav-pills nav-stacked">
 					<li><a href="job-create.php">创建工作</a></a></li>
-					<li><a href="job-category-create.php">创建工作分类</a></a></li>
 					<li><a href="job-manage.php">工作管理</a></a></li>
+					
+					<li><a href="job-category-create.php">创建工作分类</a></a></li>
 					<li><a href="job-category-manage.php">工作分类管理</a></a></li>
 				</ul>
 				</div>
