@@ -1,7 +1,22 @@
 <?
 include "../includes/common.php";
+require_once '../includes/pager.php';
 $db = getDb();
-$companies = $db->fetchAll("select * from companies");
+if(isset($_GET['page'])){
+	$page = intval($_GET['page']);
+}else{
+	$page = 1;
+}
+
+if($page == 0){
+	$page = 1;
+}
+$take = 30;
+
+$start = $take * ($page - 1);
+$total = $db->fetchOne("select count(*) from companies");
+$companies = $db->fetchAll("select * from companies limit {$start},{$take}");
+$pager = pager($page, $take, $total, 'company-manage.php?page={page}');
 ?>
 
 <?include "header.php";?>
@@ -40,15 +55,7 @@ $companies = $db->fetchAll("select * from companies");
 				</table>
 				
 				<div class="pagination">
-					<ul>
-						<li class="disabled"><a href="#"><i class="icon-step-backward"></i></a></li>
-						<li class="disabled"><a href="#"><i class="icon-chevron-left"></i></a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#"><i class="icon-chevron-right"></i></a></li>
-						<li><a href="#"><i class="icon-step-forward"></i></a></li>
-					</ul>
+					<?=$pager?>
 				</div>
 			</section>
 		</div>
