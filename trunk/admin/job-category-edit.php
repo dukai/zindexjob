@@ -9,6 +9,10 @@ if(empty($jcId)){
 }
 if(!empty($_POST)){
 	$db->query("update job_categories set name='{$_POST['name']}', description='{$_POST['description']}' where jc_id={$jcId}");
+	header('Content-Type: text/html; charset=utf-8');
+	header('refresh:3;url=job-category-manage.php');
+	echo "Edit Successful";
+	exit;
 }else{
 	$jc = $db->fetchRow("select * from job_categories where jc_id={$jcId}");
 
