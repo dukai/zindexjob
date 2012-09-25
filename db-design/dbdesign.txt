@@ -8,6 +8,10 @@ companies
 	fax
 	zipcode
 	created_time
+	website
+	scale
+	nature
+	industry
 
 company_contactuser_rel
 	id

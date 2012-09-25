@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 24, 2012 at 10:18 AM
+-- Generation Time: Sep 25, 2012 at 10:25 AM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -29,8 +29,12 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `phone` varchar(20) NOT NULL,
   `fax` varchar(20) NOT NULL,
   `zipcode` varchar(10) NOT NULL,
+  `website` varchar(200) NOT NULL,
+  `scale` varchar(20) NOT NULL COMMENT '规模',
+  `nature` varchar(20) NOT NULL COMMENT '企业性质',
+  `industry` varchar(20) NOT NULL COMMENT '所属行业',
   PRIMARY KEY (`company_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
