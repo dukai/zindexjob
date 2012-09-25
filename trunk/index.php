@@ -3,6 +3,21 @@ require_once "./includes/common.php";
 
 $db = getDb();
 $companies = $db->fetchAll("select * from companies order by company_id desc limit 10");
+$companyIds = array();
+foreach ($companies as $key => $value) {
+	$companyIds[] = $value['company_id'];
+}
+
+$idstring = implode("','", $companyIds);
+$idstring = "'" . $idstring . "'";
+$jobs = $db->fetchAll("select j.*, r.company_id as company_id from company_job_rel as r left join jobs as j on j.job_id=r.job_id where r.company_id in ({$idstring})");
+$tjobs = array();
+foreach($jobs as $key => $value){
+	if(!isset($tjobs[$value['company_id']])){
+		$tjobs[$value['company_id']] = array();
+	}
+	$tjobs[$value['company_id']][] = $value;
+}
 
 ?>
 
@@ -40,13 +55,24 @@ body,td,th {
 <?foreach($companies as $company){?>
 <article class="jobs">
 	<div class="h1"><?=$company['name']?></div>
-	<div>
-		<div>公司简介</div>
-		<div><?=$company['description']?></div>
-		<div>公司地址</div>
-		<div><?=$company['address']?></div>
-	</div>
+	<ul>
+		<li><h3>公司简介</h3><div><?=$company['description']?></div></li>
+		<li><h3>公司地址</h3><div><?=$company['address']?></div></li>
 	
+	
+		<li>
+		<h3>工作</h3>
+		<?foreach( $tjobs[$company['company_id']] as $tj){?>
+		<dl>
+			<dt><?=$tj['title']?></dt>
+			<dd><?=$tj['pay']?></dd>
+			<dd><?=$tj['treatment']?></dd>
+			<dd><?=$tj['duty']?></dd>
+			<dd><?=$tj['requirement']?></dd>
+		</dl>
+		<?}?>
+		</li>
+	</ul>
 </article>
 <?}?>
 </section>
