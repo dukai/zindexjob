@@ -61,8 +61,8 @@ body,td,th {
 	
 	
 		<li>
+		<?if(isset($tjobs[$company['company_id']])){foreach( $tjobs[$company['company_id']] as $tj){?>
 		<h3>工作</h3>
-		<?foreach( $tjobs[$company['company_id']] as $tj){?>
 		<dl>
 			<dt><?=$tj['title']?></dt>
 			<dd><?=$tj['pay']?></dd>
@@ -70,6 +70,8 @@ body,td,th {
 			<dd><?=$tj['duty']?></dd>
 			<dd><?=$tj['requirement']?></dd>
 		</dl>
+		<?}}else{?>
+		暂无工作信息
 		<?}?>
 		</li>
 	</ul>
