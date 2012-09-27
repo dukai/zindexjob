@@ -4,13 +4,8 @@ $db = getDb();
 if(!empty($_POST)){
 	
 	$now = date("Y-m-d H:i:s");
-	$db->query("insert into jobs (title, pay, address, treatment, duty, requirement, person_number, created_time) values ('{$_POST['title']}', '{$_POST['pay']}', '{$_POST['address']}', '{$_POST['treatment']}', '{$_POST['duty']}', '{$_POST['requirement']}', '{$_POST['requirement']}', '{$now}')");
-	$jobId = $db->lastId();
-	$db->query("insert into job_category_rel (job_id, jc_id) values ({$jobId}, {$_POST['jc_id']})");
-	
-	$db->query("insert into company_job_rel (company_id, job_id) values ({$_POST['company_id']}, {$jobId})");
+	$db->query("insert into jobs (title, pay, address, treatment, duty, requirement, person_number, created_time, company_id, jc_id) values ('{$_POST['title']}', '{$_POST['pay']}', '{$_POST['address']}', '{$_POST['treatment']}', '{$_POST['duty']}', '{$_POST['requirement']}', '{$_POST['person_number']}', '{$now}', '{$_POST['company_id']}', '{$_POST['jc_id']}')");
 }else{
-	$companies = $db->fetchAll("select * from companies");
 	$cates = $db->fetchAll("select * from job_categories");
 }
 ?>
@@ -28,35 +23,27 @@ if(!empty($_POST)){
 			<section>
 				<form method="post" class="form-horizontal">
 					<legend>工作职位信息</legend>
-					
-					<div class="control-group">
-						<label class="control-label" for="username">所属公司</label>
-						<div class="controls">
-							<select id="company_id" name="company_id">
-								<?foreach($companies as $key=>$value){?>
-								<option value="<?=$value['company_id']?>"><?=$value['name']?></option>
-								<?}?>
-							</select>
-						</div>
-					</div>
-					
-					<div class="control-group">
-						<label class="control-label" for="username">工作分类</label>
-						<div class="controls">
-							<select id="jc_id" name="jc_id">
-								<?foreach($cates as $key=>$value){?>
-								<option value="<?=$value['jc_id']?>"><?=$value['name']?></option>
-								<?}?>
-							</select>
-						</div>
-					</div>
-					
 					<div class="control-group">
 						<label class="control-label" for="title">工作名称</label>
 						<div class="controls">
 							<input type="text" name="title" id="title" placeholder="工作名称" />
 						</div>
 					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="username">所属公司</label>
+						<div class="controls">
+							<?=Helper::companySelector()?>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="username">工作分类</label>
+						<div class="controls">
+							<?=Helper::jobCategorySelector()?>
+						</div>
+					</div>
+					
 					
 					<div class="control-group">
 						<label class="control-label" for="address">工作地址</label>

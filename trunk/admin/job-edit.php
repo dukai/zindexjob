@@ -1,6 +1,7 @@
 <?
 include "../includes/common.php";
 $db = getDb();
+$jobId = $_GET['job_id'];
 if(empty($jobId)){
 	echo "unknow job id";
 	exit;
@@ -11,14 +12,8 @@ if(empty($jobId)){
 
 if(!empty($_POST)){
 	
-	$now = date("Y-m-d H:i:s");
-	$db->query("insert into jobs (title, pay, address, treatment, duty, requirement, person_number, created_time) values ('{$_POST['title']}', '{$_POST['pay']}', '{$_POST['address']}', '{$_POST['treatment']}', '{$_POST['duty']}', '{$_POST['requirement']}', '{$_POST['requirement']}', '{$now}')");
-	$jobId = $db->lastId();
-	$db->query("insert into job_category_rel (job_id, jc_id) values ({$jobId}, {$_POST['jc_id']})");
-	
-	$db->query("insert into company_job_rel (company_id, job_id) values ({$_POST['company_id']}, {$jobId})");
+	$db->query("update jobs set title='{$_POST['title']}', pay='{$_POST['pay']}', address='{$_POST['address']}', treatment='{$_POST['treatment']}', duty='{$_POST['duty']}', requirement='{$_POST['requirement']}', person_number='{$_POST['person_number']}', company_id='{$_POST['company_id']}', jc_id='{$_POST['jc_id']}' where job_id={$jobId}");
 }else{
-	$companies = $db->fetchAll("select * from companies");
 	$cates = $db->fetchAll("select * from job_categories");
 }
 ?>
@@ -36,35 +31,27 @@ if(!empty($_POST)){
 			<section>
 				<form method="post" class="form-horizontal">
 					<legend>工作职位信息</legend>
+					<div class="control-group">
+						<label class="control-label" for="title">工作名称</label>
+						<div class="controls">
+							<input type="text" name="title" id="title" placeholder="工作名称" value="<?=$job['title']?>" />
+						</div>
+					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="username">所属公司</label>
 						<div class="controls">
-							<select id="company_id" name="company_id">
-								<?foreach($companies as $key=>$value){?>
-								<option value="<?=$value['company_id']?>"><?=$value['name']?></option>
-								<?}?>
-							</select>
+							<?=Helper::companySelector($job['company_id'])?>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="username">工作分类</label>
 						<div class="controls">
-							<select id="jc_id" name="jc_id">
-								<?foreach($cates as $key=>$value){?>
-								<option value="<?=$value['jc_id']?>"><?=$value['name']?></option>
-								<?}?>
-							</select>
+							<?=Helper::jobCategorySelector($job['jc_id'])?>
 						</div>
 					</div>
 					
-					<div class="control-group">
-						<label class="control-label" for="title">工作名称</label>
-						<div class="controls">
-							<input type="text" name="title" id="title" placeholder="工作名称" value="<?=$job['name']?>" />
-						</div>
-					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="address">工作地址</label>
