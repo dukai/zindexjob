@@ -17,7 +17,7 @@
 				<li><a href="contactuser-create.php">创建联系人</a></a></li>
 				<li><a href="contactuser-manage.php">联系人管理</a></a></li>
 				
-				<li><a href="contactuser-create.php">管理公司规模项</a></a></li>
+				<li><a href="company-scale-manage.php">管理公司规模项</a></a></li>
 				<li><a href="contactuser-manage.php">管理公司性质项</a></a></li>
 				<li><a href="contactuser-manage.php">管理公司行业项</a></a></li>
 			</ul>
