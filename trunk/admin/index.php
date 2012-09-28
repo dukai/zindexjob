@@ -1,6 +1,5 @@
 <?include "header.php";?>
 
-<div>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<?include "sidebar.php";?>

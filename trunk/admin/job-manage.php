@@ -21,7 +21,6 @@ $pager = pager($page, $take, $total, 'job-manage.php?page={page}');
 
 <?include "header.php";?>
 
-<div>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<?include "sidebar.php";?>

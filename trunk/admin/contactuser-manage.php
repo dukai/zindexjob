@@ -6,7 +6,6 @@ $users = $db->fetchAll("select cu.*, c.name as company_name from contact_users a
 
 <?include "header.php";?>
 
-<div>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<?include "sidebar.php";?>
