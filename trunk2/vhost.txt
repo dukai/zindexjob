@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+    ServerName www.zf2.com
+    DocumentRoot D:/DK/zf2_try/public
+    SetEnv APPLICATION_ENV "development"
+	SetEnv ZF2_PATH "D:/DK/zf2/library"
+    <Directory D:/DK/zf2_try/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
