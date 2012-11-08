@@ -4,6 +4,7 @@ return array(
 	'controllers' => array(
         'invokables' => array(
             'Job\Controller\Index' => 'Job\Controller\IndexController',
+            'Job\Admin\Controller\Index' => 'Job\Admin\Controller\IndexController',
         ),
     ),
     
@@ -45,6 +46,18 @@ return array(
 					),
 				),
 			
+			),
+			
+			'jobadmin' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/job/admin',
+					'defaults' => array(
+						'__NAMESPACE__' => 'Job\Admin\Controller',
+						'controller' => 'Index',
+						'action' => 'index',
+					),
+				),
 			),
         ),
     ),
