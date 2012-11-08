@@ -3,6 +3,7 @@ return array(
     'modules' => array(
         'Application',
         'Album',
+        'Job',
     ),
     
     'module_listener_options' => array(
