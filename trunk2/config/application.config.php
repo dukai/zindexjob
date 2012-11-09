@@ -4,6 +4,7 @@ return array(
         'Application',
         'Album',
         'Job',
+        'Admin',
     ),
     
     'module_listener_options' => array(
