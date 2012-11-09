@@ -4,6 +4,7 @@ return array(
 	'controllers' => array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            'Admin\Controller\Job' => 'Admin\Controller\JobController',
         ),
     ),
     
@@ -58,6 +59,5 @@ return array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
         ),
         
-		'head_title' => 'zIndex管理系统',
     ),
 );
