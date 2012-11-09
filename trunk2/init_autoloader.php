@@ -38,9 +38,15 @@ if ($zf2Path) {
         include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
         Zend\Loader\AutoloaderFactory::factory(array(
             'Zend\Loader\StandardAutoloader' => array(
-                'autoregister_zf' => true
+                'autoregister_zf' => true,
             )
         ));
+		
+		$loader = Zend\Loader\AutoloaderFactory::getRegisteredAutoloaders();
+		$loader = $loader[Zend\Loader\AutoloaderFactory::STANDARD_AUTOLOADER];
+		
+		$loader->registerNamespace("Dk", "vendor/Dk");
+		
     }
 }
 
