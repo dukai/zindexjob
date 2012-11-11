@@ -53,11 +53,17 @@ return array(
 	
     'view_manager' => array(
         'template_path_stack' => array(
-            'job' => __DIR__ . '/../view',
+            'admin' => __DIR__ . '/../view',
         ),
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/admin'           => __DIR__ . '/../view/layout/layout.phtml',
         ),
         
     ),
+    
+	'view_helpers' => array(
+      'invokables' => array(
+         'company_selector' => 'Admin\Helper\CompanySelector',
+      ),
+   ),
 );

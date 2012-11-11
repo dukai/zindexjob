@@ -5,6 +5,7 @@ namespace Admin\Controller;
 use Dk\Mvc\Controller\ControllerBase;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
+use Job\Model\Company;
 
 class JobController extends ControllerBase{
 	public function indexAction(){
@@ -23,5 +24,15 @@ class JobController extends ControllerBase{
 			'pager' => $pager,
 		));
 		return $view;
+	}
+	
+	public function createAction(){
+		$company = new Company($this->getAdapter());
+		
+		$companies = $company->getCompanies();
+		
+		return new ViewModel(array(
+			'companies' => $companies,
+		));
 	}
 }
