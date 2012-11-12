@@ -21,6 +21,10 @@ class ControllerBase extends AbstractActionController{
 		return $this->adapter;
 	}
 	
+	public function getService($name){
+		return $this->getServiceLocator()->get($name);
+	}
+	
 	protected function pager($currpage, $perpage, $nums, $q, $currPageStyle='', $othersPageStyle='',$dp = 10){
 		$nums = intval($nums);
 		$maxPages = ceil($nums/$perpage);

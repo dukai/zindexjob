@@ -6,6 +6,8 @@ use Dk\Mvc\Controller\ControllerBase;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
 use Job\Model\Company;
+use Job\Model\JobCategory;
+use Job\Model\Job;
 
 class JobController extends ControllerBase{
 	public function indexAction(){
@@ -28,11 +30,19 @@ class JobController extends ControllerBase{
 	
 	public function createAction(){
 		$company = new Company($this->getAdapter());
-		
+		$jobcategory = new JobCategory($this->getAdapter());
 		$companies = $company->getCompanies();
+		$jobCategories = $jobcategory->getJobCategories();
+		$request = $this->getRequest();
+		if($request->isPost()){
+			
+			$job = new Job($this->getAdapter());
+			$job->simpleInsert($request->getPost()->getArrayCopy());
+		}
 		
 		return new ViewModel(array(
 			'companies' => $companies,
+			'jobCategories' => $jobCategories,
 		));
 	}
 }

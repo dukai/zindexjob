@@ -64,6 +64,7 @@ return array(
 	'view_helpers' => array(
       'invokables' => array(
          'company_selector' => 'Admin\Helper\CompanySelector',
+         'job_category_selector' => 'Admin\Helper\JobCategorySelector',
       ),
    ),
 );
