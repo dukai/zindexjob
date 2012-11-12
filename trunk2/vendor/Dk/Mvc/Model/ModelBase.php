@@ -45,7 +45,6 @@ class ModelBase{
 		}
 		$insert->columns($columns);
 		$insert->values($valuse);
-		
-		return $this->query($insert->getSqlString());
+		return $this->query($insert->getSqlString($this->adapter->getPlatform()));
 	}
 }

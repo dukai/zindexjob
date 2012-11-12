@@ -29,20 +29,39 @@ class JobController extends ControllerBase{
 	}
 	
 	public function createAction(){
-		$company = new Company($this->getAdapter());
-		$jobcategory = new JobCategory($this->getAdapter());
-		$companies = $company->getCompanies();
-		$jobCategories = $jobcategory->getJobCategories();
+		
 		$request = $this->getRequest();
 		if($request->isPost()){
 			
 			$job = new Job($this->getAdapter());
 			$job->simpleInsert($request->getPost()->getArrayCopy());
+			$this->flashMessenger()->addMessage('创建成功！');
+			return $this->redirect()->toUrl('/admin/job/create');
+		}else{
+			$company = new Company($this->getAdapter());
+			$jobcategory = new JobCategory($this->getAdapter());
+			$companies = $company->getCompanies();
+			$jobCategories = $jobcategory->getJobCategories();
+			
+			$returnArray = array(
+				'companies' => $companies,
+				'jobCategories' => $jobCategories,
+			);
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			
+			return new ViewModel($returnArray);
 		}
 		
-		return new ViewModel(array(
-			'companies' => $companies,
-			'jobCategories' => $jobCategories,
-		));
+		
+	}
+	
+	public function editAction(){
+		
+	}
+	
+	public function deleteAction(){
+		
 	}
 }

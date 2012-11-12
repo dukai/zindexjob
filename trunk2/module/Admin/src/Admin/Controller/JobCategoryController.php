@@ -24,4 +24,16 @@ class JobCategoryController extends ControllerBase{
 		));
 		return $view;
 	}
+	
+	public function createAction(){
+		
+	}
+	
+	public function editAction(){
+		
+	}
+	
+	public function deleteAction(){
+		
+	}
 }
