@@ -23,9 +23,17 @@ class ModelBase{
 	public function query($cmd){
 		return $this->adapter->query($cmd, Adapter::QUERY_MODE_EXECUTE);
 	}
-	
+	/* 
+	 * @param $cmd
+	 * @return Array
+	 */
 	public function simpleFetch($cmd){
-		return $this->adapter->query($cmd, Adapter::QUERY_MODE_EXECUTE);
+		return $this->adapter->query($cmd, Adapter::QUERY_MODE_EXECUTE)->toArray();
+	}
+	
+	public function getCount(){
+		$count = $this->query("select count(*) as count from " . $this->tableName)->current();
+		return intval($count['count']);
 	}
 	
 	public function simpleInsert(array $data){

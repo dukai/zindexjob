@@ -17,12 +17,14 @@ class JobController extends ControllerBase{
 		$start = $take * ($page - 1);
 		
 		$adapter = $this->getAdapter();
-		$total = $adapter->query("select count(*) from jobs", Adapter::QUERY_MODE_EXECUTE)->count();
-		$result = $adapter->query("select j.*, c.name as company_name, jc.name as jc_name from jobs as j left join companies as c on j.company_id=c.company_id left join job_categories as jc on jc.jc_id=j.jc_id limit {$start},{$take}", Adapter::QUERY_MODE_EXECUTE);
-		$pager = $this->pager($page, $take, $total, 'job-manage.php?page={page}');
+		$job = new Job($adapter);
+		
+		$total = $job->getCount();
+		$result = $job->getJobs($take, $start);
+		$pager = $this->pager($page, $take, $total, '/admin/job?page={page}');
 		
 		$view = new ViewModel(array(
-			'companies' => $result->toArray(),
+			'companies' => $result,
 			'pager' => $pager,
 		));
 		return $view;

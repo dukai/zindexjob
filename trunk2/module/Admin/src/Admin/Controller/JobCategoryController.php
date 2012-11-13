@@ -5,6 +5,7 @@ namespace Admin\Controller;
 use Dk\Mvc\Controller\ControllerBase;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter\Adapter;
+use Job\Model\JobCategory;
 
 class JobCategoryController extends ControllerBase{
 	public function indexAction(){
@@ -14,18 +15,36 @@ class JobCategoryController extends ControllerBase{
 		$start = $take * ($page - 1);
 		
 		$adapter = $this->getAdapter();
-		$total = $adapter->query("select count(*) from job_categories", Adapter::QUERY_MODE_EXECUTE)->count();
-		$result = $adapter->query("select j.*, c.name as company_name, jc.name as jc_name from jobs as j left join companies as c on j.company_id=c.company_id left join job_categories as jc on jc.jc_id=j.jc_id limit {$start},{$take}", Adapter::QUERY_MODE_EXECUTE);
-		$pager = $this->pager($page, $take, $total, 'job-manage.php?page={page}');
+		$jobCategory = new JobCategory($adapter);
+		$total = $jobCategory->getCount();
+		
+		$jobCategories = $jobCategory->getJobCategories($take, $start);
+		$pager = $this->pager($page, $take, $total, '/admin/job-category?page={page}');
 		
 		$view = new ViewModel(array(
-			'companies' => $result->toArray(),
+			'companies' => $jobCategories,
 			'pager' => $pager,
 		));
 		return $view;
 	}
 	
 	public function createAction(){
+		
+		$request = $this->getRequest();
+		$jobCategory = $this->getService('Job\Model\JobCategory');
+		if($request->isPost()){
+			$jobCategory->simpleInsert($request->getPost()->getArrayCopy());
+			$this->flashMessenger()->addMessage('创建成功！');
+			return $this->redirect()->toUrl('/admin/job-category/create');
+		}else{
+			$returnArray = array(
+			);
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			
+			return new ViewModel($returnArray);
+		}
 		
 	}
 	

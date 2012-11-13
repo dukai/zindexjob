@@ -5,6 +5,7 @@ return array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             'Admin\Controller\Job' => 'Admin\Controller\JobController',
+            'Admin\Controller\JobCategory' => 'Admin\Controller\JobCategoryController',
         ),
     ),
     

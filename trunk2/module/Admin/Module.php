@@ -38,5 +38,17 @@ class Module {
 			), 
 		);
 	}
+	
+	public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+				'Job\Model\JobCategory' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Job\Model\JobCategory($dbAdapter);
+				}
+            ),
+        );
+    }
 
 }

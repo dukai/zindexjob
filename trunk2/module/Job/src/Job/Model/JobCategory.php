@@ -12,7 +12,12 @@ class JobCategory extends ModelBase{
 		parent::__construct($adapter, self::TABLE_NAME);
 	}
 	
-	public function getJobCategories(){
-		return $this->simpleFetch("select * from " . self::TABLE_NAME)->toArray();
+	public function getJobCategories($take = -1, $start = 0){
+		$limit = "";
+		
+		if($take > 0){
+			$limit = " limit {$start}, {$take}";
+		}
+		return $this->simpleFetch("select * from " . self::TABLE_NAME . $limit);
 	}
 }

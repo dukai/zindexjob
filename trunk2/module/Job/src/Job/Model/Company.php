@@ -12,6 +12,6 @@ class Company extends ModelBase{
 	}
 	
 	public function getCompanies(){
-		return $this->simpleFetch("select * from companies")->toArray();
+		return $this->simpleFetch("select * from companies");
 	}
 }
