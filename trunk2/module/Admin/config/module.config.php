@@ -6,6 +6,11 @@ return array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             'Admin\Controller\Job' => 'Admin\Controller\JobController',
             'Admin\Controller\JobCategory' => 'Admin\Controller\JobCategoryController',
+            'Admin\Controller\Company' => 'Admin\Controller\CompanyController',
+            'Admin\Controller\CompanyIndustry' => 'Admin\Controller\CompanyIndustryController',
+            'Admin\Controller\CompanyNature' => 'Admin\Controller\CompanyNatureController',
+            'Admin\Controller\CompanyScale' => 'Admin\Controller\CompanyScaleController',
+            'Admin\Controller\Contactuser' => 'Admin\Controller\ContactuserController',
         ),
     ),
     
@@ -66,6 +71,7 @@ return array(
       'invokables' => array(
          'company_selector' => 'Admin\Helper\CompanySelector',
          'job_category_selector' => 'Admin\Helper\JobCategorySelector',
+         'messager' => 'Admin\Helper\Messager',
       ),
    ),
 );
