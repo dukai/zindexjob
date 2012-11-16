@@ -11,7 +11,12 @@ class Company extends ModelBase{
 		parent::__construct($adapter, self::TABLE_NAME);
 	}
 	
-	public function getCompanies(){
-		return $this->simpleFetch("select * from companies");
+	public function getCompanies($take = -1, $start = 0){
+		$limit = "";
+		
+		if($take > 0){
+			$limit = " limit {$start}, {$take}";
+		}
+		return $this->simpleFetch("select * from companies" . $limit);
 	}
 }
