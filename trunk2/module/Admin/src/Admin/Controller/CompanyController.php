@@ -1,0 +1,51 @@
+<?php
+
+namespace Admin\Controller;
+
+use Zend\View\Model\ViewModel;
+use Dk\Mvc\Controller\ControllerBase;
+use Job\Model\Company;
+use Zend\Db\Adapter\Adapter;
+
+class CompanyController extends ControllerBase{
+	
+	
+	public function indexAction(){
+		$page = intval($this->params('page', 1));
+		$take = 30;
+		$start = $take * ($page - 1);
+		
+		$adapter = $this->getAdapter();
+		$company = new Company($adapter);
+		
+		$total = $company->getCount();
+		$result = $company->getCompanies($take, $start);
+		$pager = $this->pager($page, $take, $total, '/admin/company?page={page}');
+		
+		$view = new ViewModel(array(
+			'companies' => $result,
+			'pager' => $pager,
+		));
+		return $view;
+	}
+	
+	public function createAction(){
+		$request = $this->getRequest();
+		if($request->isPost()){
+			
+			$company = new Company($this->getAdapter());
+			$company->simpleInsert($request->getPost()->getArrayCopy());
+			$this->flashMessenger()->addMessage('创建成功！');
+			return $this->redirect()->toUrl('/admin/company/create');
+		}else{
+			
+			$returnArray = array(
+			);
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			
+			return new ViewModel($returnArray);
+		}
+	}
+}
