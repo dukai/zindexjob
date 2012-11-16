@@ -1,9 +1,6 @@
 			<h1 class="page-header">新增工作分类</h1>
 			<?if(isset($messages)){?>
-			<div class="alert alert-success">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-				<?=$messages[0]?>
-			</div>
+			<?=$this->messager($messages)?>
 			<?}?>
 			<section>
 				<form method="post" class="form-horizontal">
