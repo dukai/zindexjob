@@ -9,13 +9,14 @@ class Captcha {
 	static $image;
 	static $fontSize = 20;
 	static $textColor;
-	static $codeSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	static $codeSet = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 	public static function randTextEN($length = "32") {
 		$result = "";
+		$codeLength = strlen(self::$codeSet);
 		for ($i = 0; $i < $length; $i++) {
-			$num[$i] = rand(0, 61);
-			$result .= $self::$codeSet[$num[$i]];
+			$num[$i] = rand(0, $codeLength - 1);
+			$result .= self::$codeSet[$num[$i]];
 		}
 		return $result;
 	}
@@ -31,13 +32,14 @@ class Captcha {
 	public static function getImage($text, $im_x = 230, $im_y = 32) {
 		self::$imageH = $im_y;
 		self::$imageW = $im_x;
-		$im = imagecreatetruecolor($im_x, $im_y);
-		$text_c = ImageColorAllocate($im, mt_rand(0, 100), mt_rand(0, 100), mt_rand(0, 100));
+		self::$image = $im = imagecreatetruecolor($im_x, $im_y);
+		self::$textColor = $text_c = ImageColorAllocate($im, mt_rand(0, 100), mt_rand(0, 100), mt_rand(0, 100));
 		$tmpC0 = mt_rand(210, 255);
 		$tmpC1 = mt_rand(210, 255);
 		$tmpC2 = mt_rand(210, 255);
 		$buttum_c = ImageColorAllocate($im, $tmpC0, $tmpC1, $tmpC2);
 		imagefill($im, 16, 13, $buttum_c);
+		self::writeNoise();
 		//echo $text;
 		$font = 'c://WINDOWS//Fonts//msyh.ttf';
 		//echo strlen($text);
@@ -68,7 +70,7 @@ class Captcha {
 		}
 		self::$image = $distortion_im;
 		self::writeCurve();
-		self::writeNoise($distortion_im, $im_x, $im_y, $text_c);
+		
 		
 
 		Header("Content-type: image/PNG");
@@ -82,7 +84,7 @@ class Captcha {
 		ImageDestroy($im);
 	}
 
-	static function writeCurve() {
+	static function writeNoise() {
 		for($i = 0; $i < 10; $i++){   
             //杂点颜色   
             $noiseColor = imagecolorallocate(   
@@ -105,7 +107,7 @@ class Captcha {
         }
 	}
 
-	static function writeNoise($distortion_im, $im_x, $im_y, $text_c) {
+	static function writeCurve() {
 		$A = mt_rand(1, self::$imageH / 2);
 		// 振幅
 		$b = mt_rand(-self::$imageH / 4, self::$imageH / 4);
@@ -126,7 +128,7 @@ class Captcha {
 				// y = Asin(ωx+φ) + b
 				$i = (int)((self::$fontSize - 6) / 4);
 				while ($i > 0) {
-					imagesetpixel(self::$image, $px + $i, $py + $i, $text_c);
+					imagesetpixel(self::$image, $px + $i, $py + $i, self::$textColor);
 					//这里画像素点比imagettftext和imagestring性能要好很多
 					$i--;
 				}
@@ -149,7 +151,7 @@ class Captcha {
 				// y = Asin(ωx+φ) + b
 				$i = (int)((self::$fontSize - 8) / 4);
 				while ($i > 0) {
-					imagesetpixel(self::$image, $px + $i, $py + $i, $text_c);
+					imagesetpixel(self::$image, $px + $i, $py + $i, self::$textColor);
 					//这里(while)循环画像素点比imagettftext和imagestring用字体大小一次画出
 					//的（不用while循环）性能要好很多
 					$i--;
