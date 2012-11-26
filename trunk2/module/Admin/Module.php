@@ -46,7 +46,28 @@ class Module {
 				'Job\Model\JobCategory' => function($sm){
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 					return new \Job\Model\JobCategory($dbAdapter);
+				},
+				'Job\Model\CompanyScale' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Job\Model\CompanyScale($dbAdapter);
+				},
+				
+				'Job\Model\CompanyNature' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Job\Model\CompanyNature($dbAdapter);
+				},
+				
+				'Job\Model\CompanyIndustry' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Job\Model\CompanyIndustry($dbAdapter);
+				},
+				
+				'Job\Model\ContactUser' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Job\Model\ContactUser($dbAdapter);
+					
 				}
+				
             ),
         );
     }

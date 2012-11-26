@@ -10,7 +10,7 @@ return array(
             'Admin\Controller\CompanyIndustry' => 'Admin\Controller\CompanyIndustryController',
             'Admin\Controller\CompanyNature' => 'Admin\Controller\CompanyNatureController',
             'Admin\Controller\CompanyScale' => 'Admin\Controller\CompanyScaleController',
-            'Admin\Controller\Contactuser' => 'Admin\Controller\ContactuserController',
+            'Admin\Controller\ContactUser' => 'Admin\Controller\ContactUserController',
         ),
     ),
     
