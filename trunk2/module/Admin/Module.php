@@ -66,7 +66,12 @@ class Module {
 					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
 					return new \Job\Model\ContactUser($dbAdapter);
 					
-				}
+				},
+				'Job\Model\Company' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Job\Model\Company($dbAdapter);
+					
+				},
 				
             ),
         );

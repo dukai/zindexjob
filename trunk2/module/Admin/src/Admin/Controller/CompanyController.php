@@ -38,8 +38,17 @@ class CompanyController extends ControllerBase{
 			$this->flashMessenger()->addMessage('创建成功！');
 			return $this->redirect()->toUrl('/admin/company/create');
 		}else{
+			$csModel = $this->getService('Job\Model\CompanyScale');
+			$scales = $csModel->getCompanyScales();
+			$cNModel = $this->getService('Job\Model\CompanyNature');
+			$natures = $cNModel->getCompanyNatures();
+			$cIModel = $this->getService('Job\Model\CompanyIndustry');
+			$industries = $cIModel->getCompanyIndustries();
 			
 			$returnArray = array(
+				'natures' => $natures,
+				'scales' => $scales,
+				'industries' => $industries,
 			);
 			if($this->flashMessenger()->hasMessages()){
 				$returnArray['messages'] = $this->flashMessenger()->getMessages();

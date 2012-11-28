@@ -5,13 +5,13 @@ use Dk\Mvc\Model\ModelBase;
 
 class CompanyIndustry extends ModelBase{
 	
-	const TABLE_NAME = 'company_industry';
+	const TABLE_NAME = 'company_industries';
 	
 	public function __construct($adapter){
 		parent::__construct($adapter, self::TABLE_NAME);
 	}
 	
-	public function getCompanyIndustry($take = -1, $start = 0){
+	public function getCompanyIndustries($take = -1, $start = 0){
 		$limit = "";
 		
 		if($take > 0){

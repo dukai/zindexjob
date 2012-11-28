@@ -22,21 +22,21 @@
 					<div class="control-group">
 						<label class="control-label" for="scale">公司规模</label>
 						<div class="controls">
-							<input type="text" name="scale" id="scale" placeholder="公司规模" />
+							<?=$this->company_scale_selector($scales)?>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="nature">公司性质</label>
 						<div class="controls">
-							<input type="text" name="nature" id="nature" placeholder="公司性质" />
+							<?=$this->company_nature_selector($natures)?>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="industry">所属行业</label>
 						<div class="controls">
-							<input type="text" name="industry" id="industry" placeholder="所属行业" />
+							<?=$this->company_industry_selector($industries)?>
 						</div>
 					</div>
 					

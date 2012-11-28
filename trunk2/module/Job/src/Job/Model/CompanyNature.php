@@ -5,13 +5,13 @@ use Dk\Mvc\Model\ModelBase;
 
 class CompanyNature extends ModelBase{
 	
-	const TABLE_NAME = 'company_nature';
+	const TABLE_NAME = 'company_natures';
 	
 	public function __construct($adapter){
 		parent::__construct($adapter, self::TABLE_NAME);
 	}
 	
-	public function getCompanyNature($take = -1, $start = 0){
+	public function getCompanyNatures($take = -1, $start = 0){
 		$limit = "";
 		
 		if($take > 0){

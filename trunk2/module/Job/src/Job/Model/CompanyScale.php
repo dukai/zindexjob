@@ -5,7 +5,7 @@ use Dk\Mvc\Model\ModelBase;
 
 class CompanyScale extends ModelBase{
 	
-	const TABLE_NAME = 'company_scale';
+	const TABLE_NAME = 'company_scales';
 	
 	public function __construct($adapter){
 		parent::__construct($adapter, self::TABLE_NAME);

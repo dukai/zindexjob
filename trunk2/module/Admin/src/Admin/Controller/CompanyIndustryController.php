@@ -15,7 +15,7 @@ class CompanyIndustryController extends ControllerBase{
 		$model = $this->getService('Job\Model\CompanyIndustry');
 		$total = $model->getCount();
 		
-		$companyIndustrys = $model->getCompanyIndustry($take, $start);
+		$companyIndustrys = $model->getCompanyIndustries($take, $start);
 		$pager = $this->pager($page, $take, $total, '/admin/company-industry?page={page}');
 		
 		$view = new ViewModel(array(

@@ -1,11 +1,11 @@
 			
 			
-			<h1 class="page-header">公司规模管理</h1>
+			<h1 class="page-header">公司性质管理</h1>
 			
 			<section>
 				<div class="navbar btn-toolbar">
 					<div class="navbar-inner">
-						<a href="/admin/company-nature/create" class="btn btn-success">新增公司规模</a>
+						<a href="/admin/company-nature/create" class="btn btn-success">新增公司性质</a>
 						
 						<div class="btn-group" >
 							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
@@ -23,7 +23,7 @@
 				<table class="table table-striped">
 					<tr><th width="30"><input type="checkbox" /></th><th width="60">#</th><th>名称</th><th width="150">操作</th></tr>
 					<?foreach($natures as $key=>$value){?>
-					<tr><td><input type="checkbox" /></td><td><?=$value['id']?></td><td><?=$value['title']?></td><td><div class="btn-group"><a href="job-category-edit.php?jc_id=<?=$value['id']?>" class="btn btn-primary btn-small">修改</a><a href="job-category-delete.php?jc_id=<?=$value['id']?>" class="btn btn-danger btn-small">删除</a></div></td></tr>
+					<tr><td><input type="checkbox" /></td><td><?=$value['id']?></td><td><?=$value['name']?></td><td><div class="btn-group"><a href="job-category-edit.php?jc_id=<?=$value['id']?>" class="btn btn-primary btn-small">修改</a><a href="job-category-delete.php?jc_id=<?=$value['id']?>" class="btn btn-danger btn-small">删除</a></div></td></tr>
 					<?}?>
 				</table>
 				

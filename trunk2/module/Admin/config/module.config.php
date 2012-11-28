@@ -72,6 +72,9 @@ return array(
          'company_selector' => 'Admin\Helper\CompanySelector',
          'job_category_selector' => 'Admin\Helper\JobCategorySelector',
          'messager' => 'Admin\Helper\Messager',
+         'company_scale_selector' => 'Admin\Helper\CompanyScaleSelector',
+         'company_nature_selector' => 'Admin\Helper\CompanyNatureSelector',
+         'company_industry_selector' => 'Admin\Helper\CompanyIndustrySelector',
       ),
    ),
 );

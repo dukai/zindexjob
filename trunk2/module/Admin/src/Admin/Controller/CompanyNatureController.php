@@ -14,7 +14,7 @@ class CompanyNatureController extends ControllerBase{
 		$model = $this->getService('Job\Model\CompanyNature');
 		$total = $model->getCount();
 		
-		$companyNatures = $model->getCompanyNature($take, $start);
+		$companyNatures = $model->getCompanyNatures($take, $start);
 		$pager = $this->pager($page, $take, $total, '/admin/company-nature?page={page}');
 		
 		$view = new ViewModel(array(
