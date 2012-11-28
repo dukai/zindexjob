@@ -55,4 +55,8 @@ class ModelBase{
 		$insert->values($valuse);
 		return $this->query($insert->getSqlString($this->adapter->getPlatform()));
 	}
+	
+	public function getLastId(){
+		return $this->adapter->getDriver()->getLastGeneratedValue();
+	}
 }

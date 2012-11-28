@@ -12,9 +12,12 @@ class ContactUserController extends ControllerBase{
 		$cuModel = $this->getService('Job\Model\ContactUser');
 		if($request->isPost()){
 			
-			$cuModel->simpleInsert($request->getPost()->getArrayCopy());
+			$result = $cuModel->simpleInsert($request->getPost()->getArrayCopy());
+			$cuid = $cuModel->getLastId();
+			$companyId = intval($this->params()->fromPost('company_id', 0));
+			$cuModel->addCompanyRel($companyId, $cuid);
 			$this->flashMessenger()->addMessage('创建成功！');
-			return $this->redirect()->toUrl('/admin/company/create');
+			return $this->redirect()->toUrl('/admin/contact-user/create');
 		}else{
 			$companyModel = $this->getService('Job\Model\Company');
 			$companies = $companyModel->getCompanies();

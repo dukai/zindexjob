@@ -1,5 +1,7 @@
-<h1 class="page-header">创建联系人</h1>
-			
+			<h1 class="page-header">创建联系人</h1>
+			<?if(isset($messages)){?>
+			<?=$this->messager($messages)?>
+			<?}?>
 			<section>
 				<form method="post" class="form-horizontal">
 					<legend>联系人信息</legend>

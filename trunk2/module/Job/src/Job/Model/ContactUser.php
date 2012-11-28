@@ -19,4 +19,8 @@ class ContactUser extends ModelBase{
 		}
 		return $this->simpleFetch("select cu.*, c.name as company_name from contact_users as cu left join company_contactuser_rel as r on cu.uid=r.uid left join companies as c on r.company_id=c.company_id" . $limit);
 	}
+	
+	public function addCompanyRel($companyId, $uid){
+		return $this->query("insert into company_contactuser_rel (company_id, uid) values ('$companyId', '$uid')");
+	}
 }
