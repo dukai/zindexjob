@@ -19,4 +19,8 @@ class Company extends ModelBase{
 		}
 		return $this->simpleFetch("select * from companies" . $limit);
 	}
+	
+	public function getCompany($id){
+		return $this->query("select * from " . self::TABLE_NAME . " where company_id = {$id}")->current();
+	}
 }

@@ -56,6 +56,23 @@ class ModelBase{
 		return $this->query($insert->getSqlString($this->adapter->getPlatform()));
 	}
 	
+	public function simpleUpdate(array $data, $where){
+		$sql = new Sql($this->adapter);
+		$update = $sql->update($this->tableName);
+		$columns = array();
+		$valuse = array();
+		foreach ($data as $key => $value) {
+			if(in_array($key, $this->columns)){
+				$columns[] = $key;
+				$valuse[$key] = $value;
+			}
+			
+		}
+		
+		$update->set($valuse)->where($where);
+		return $this->query($update->getSqlString($this->adapter->getPlatform()));
+	}
+	
 	public function getLastId(){
 		return $this->adapter->getDriver()->getLastGeneratedValue();
 	}

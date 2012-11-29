@@ -57,4 +57,32 @@ class CompanyController extends ControllerBase{
 			return new ViewModel($returnArray);
 		}
 	}
+	
+	public function editAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		$request = $this->getRequest();
+		$companyM = $this->getService('Job\Model\Company');
+		if($request->isPost()){
+			$company->simpleUpdate($request->getPost()->getArrayCopy(), array('company_id' => $id));
+			$this->flashMessenger()->addMessage('编辑成功！');
+			return $this->redirect()->toUrl('/admin/company/edit?id=' . $id);
+		}else{
+			$csModel = $this->getService('Job\Model\CompanyScale');
+			$scales = $csModel->getCompanyScales();
+			$cNModel = $this->getService('Job\Model\CompanyNature');
+			$natures = $cNModel->getCompanyNatures();
+			$cIModel = $this->getService('Job\Model\CompanyIndustry');
+			$industries = $cIModel->getCompanyIndustries();
+			$returnArray = array(
+				'natures' => $natures,
+				'scales' => $scales,
+				'industries' => $industries,
+				'company' => $companyM->getCompany($id),
+			);
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			return  new ViewModel($returnArray);
+		}
+	}
 }
