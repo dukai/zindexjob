@@ -15,70 +15,70 @@
 					<div class="control-group">
 						<label class="control-label" for="website">网址</label>
 						<div class="controls">
-							<input type="text" name="website" id="website" placeholder="网址" />
+							<input type="text" name="website" id="website" placeholder="网址" value="<?=$company['website']?>" />
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="scale">公司规模</label>
 						<div class="controls">
-							<?=$this->company_scale_selector($scales)?>
+							<?=$this->company_scale_selector($scales, $company['scale'])?>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="nature">公司性质</label>
 						<div class="controls">
-							<?=$this->company_nature_selector($natures)?>
+							<?=$this->company_nature_selector($natures, $company['nature'])?>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="industry">所属行业</label>
 						<div class="controls">
-							<?=$this->company_industry_selector($industries)?>
+							<?=$this->company_industry_selector($industries, $company['industry'])?>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="description">公司描述</label>
 						<div class="controls">
-							<textarea name="description" id="description" placeholder="公司描述" class="span6"></textarea>
+							<textarea name="description" id="description" placeholder="公司描述" class="span6"><?=$company['description']?></textarea>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="address">公司地址</label>
 						<div class="controls">
-							<input type="text" name="address" id="address" placeholder="公司地址" />
+							<input type="text" name="address" id="address" placeholder="公司地址" value="<?=$company['address']?>" />
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="phone">联系电话</label>
 						<div class="controls">
-							<input type="text" name="phone" id="phone" placeholder="联系电话" />
+							<input type="text" name="phone" id="phone" placeholder="联系电话" value="<?=$company['phone']?>" />
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="fax">传真</label>
 						<div class="controls">
-							<input type="text" name="fax" id="fax" placeholder="传真" />
+							<input type="text" name="fax" id="fax" placeholder="传真" value="<?=$company['fax']?>" />
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="zipcode">邮政编码</label>
 						<div class="controls">
-							<input type="text" name="zipcode" id="zipcode" placeholder="邮政编码" />
+							<input type="text" name="zipcode" id="zipcode" placeholder="邮政编码" value="<?=$company['zipcode']?>" />
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label" for="map_url">地图链接</label>
 						<div class="controls">
-							<input type="text" name="map_url" id="map_url" placeholder="地图链接" />
+							<input type="text" name="map_url" id="map_url" placeholder="地图链接" value="<?=$company['map_url']?>" />
 						</div>
 					</div>
 					

@@ -63,7 +63,7 @@ class CompanyController extends ControllerBase{
 		$request = $this->getRequest();
 		$companyM = $this->getService('Job\Model\Company');
 		if($request->isPost()){
-			$company->simpleUpdate($request->getPost()->getArrayCopy(), array('company_id' => $id));
+			$companyM->simpleUpdate($request->getPost()->getArrayCopy(), array('company_id' => $id));
 			$this->flashMessenger()->addMessage('编辑成功！');
 			return $this->redirect()->toUrl('/admin/company/edit?id=' . $id);
 		}else{
