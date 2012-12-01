@@ -5,6 +5,7 @@ return array(
         'Album',
         'Job',
         'Admin',
+        'Auth',
     ),
     
     'module_listener_options' => array(
