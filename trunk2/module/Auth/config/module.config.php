@@ -42,4 +42,10 @@ return array(
             'layout/auth'           => __DIR__ . '/../view/layout/layout.phtml',
         ),
     ),
+    
+	'view_helpers' => array(
+      'invokables' => array(
+         'messager' => '\Admin\Helper\Messager',
+      ),
+   ),
 );

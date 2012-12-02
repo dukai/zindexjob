@@ -13,6 +13,12 @@ class ControllerBase extends AbstractActionController{
 	
 	protected $adapter;
 	
+	public function getConfig(){
+		$event = $this->event;
+		$app = $event->getApplication();
+		
+		return $app->getConfig();	
+	}
 	
 	protected function getAdapter(){
 		if(empty($this->adapter)){
@@ -22,7 +28,11 @@ class ControllerBase extends AbstractActionController{
 	}
 	
 	public function getService($name){
-		return $this->getServiceLocator()->get($name);
+		if($this->getServiceLocator()->has($name)){
+			return $this->getServiceLocator()->get($name);
+		}else{
+			return null;
+		}
 	}
 	
 	protected function pager($currpage, $perpage, $nums, $q, $currPageStyle='', $othersPageStyle='',$dp = 10){

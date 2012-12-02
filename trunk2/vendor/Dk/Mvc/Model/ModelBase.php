@@ -31,6 +31,10 @@ class ModelBase{
 		return $this->adapter->query($cmd, Adapter::QUERY_MODE_EXECUTE)->toArray();
 	}
 	
+	public function fetchRow($cmd){
+		return $this->adapter->query($cmd, Adapter::QUERY_MODE_EXECUTE)->current();
+	}
+	
 	public function getCount(){
 		$count = $this->query("select count(*) as count from " . $this->tableName)->current();
 		return intval($count['count']);

@@ -1,8 +1,11 @@
 	<style>
 	.form-signin{max-width: 400px;margin:0 auto;}
-		
 	</style>
-	<form class="form-signin">
+	
+	<form class="form-signin" method="post">
+		<?if(isset($messages)){?>
+		<?=$this->messager($messages)?>
+		<?}?>
 		<h2 class="form-signin-heading">登录</h2>
 		<input type="text" class="input-block-level" placeholder="用户名" name="username">
 		<input type="password" class="input-block-level" placeholder="密码" name="password">

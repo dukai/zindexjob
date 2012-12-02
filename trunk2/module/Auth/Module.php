@@ -1,12 +1,14 @@
 <?
 namespace Auth;
 use Zend\Mvc\MvcEvent;
+use Dk\RevCrypt;
 class Module {
 	
 	public function onBootstrap($e){
 		$app = $e->getParam('application');
 		$app->getEventManager()->attach('dispatch', array($this, 'preDispatch'), 100);
 		$app->getEventManager()->attach('dispatch', array($this, 'setLayout'), -100);
+		$app->getEventManager()->attach(MvcEvent::EVENT_RENDER, array($this, 'setUserToView'), 100);
 	}
 	
 	public function preDispatch($e){
@@ -15,12 +17,41 @@ class Module {
 		$pieces = explode('\\', $controller);
 		$moduel = $pieces[0];
 		$action = $matches->getParam('action');
-		
+		$app = $e->getApplication();
+		$sm = $app->getServiceManager();
+		$config = $app->getConfig();
+		$secretKey = $config['secretkey'];
+		$member = $this->getLoginMember($secretKey, $sm);
+		$sm->setAllowOverride(true);
+		$sm->setService('loginMember', $member);
 		if($moduel == 'Admin'){
 			exit("Please login first");
 		}
 		
 		
+	}
+	
+	private function getLoginMember($secretKey, $sm){
+		if(empty($_COOKIE['auth'])){
+			return null;
+		}
+		$authStr = $_COOKIE['auth'];
+		if(empty($authStr)){
+			return null;
+		}
+		$authStr = RevCrypt::decode($authStr, $secretKey);
+		$auths = json_decode($authStr,true);
+		
+		
+		if(empty($auths) || !is_array($auths) || !array_key_exists('uid',$auths) || !array_key_exists('password',$auths)){
+			return null;
+		}
+		$memberModel = $sm->get('Auth\Model\Member');
+		
+		if(!$memberModel->checkExistByUid($auths['uid']) || !$memberModel->checkPassword($auths['password'], false)){
+			return null;
+		}
+		return $memberModel->getCurrentMember();
 	}
 	
 	public function setLayout($e){
@@ -33,6 +64,22 @@ class Module {
 
         $viewModel = $e->getViewModel();
         $viewModel->setTemplate('layout/auth');
+	}
+	
+	public function setUserToView($e){
+		$sm = $e->getApplication()->getServiceManager();
+		if($sm->has('loginMember')){
+			$member = $sm->get('loginMember');
+		}else{
+			$member = array();
+		}
+		
+        $viewModel = $e->getViewModel();
+		
+        $viewModel->setVariables(array(
+            'member' => $member,
+        ));
+		
 	}
 	
 	public function getConfig() {
@@ -53,4 +100,16 @@ class Module {
 		);
 	}
 	
+	public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+				'Auth\Model\Member' => function($sm){
+					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+					return new \Auth\Model\Member($dbAdapter);
+				},
+				
+            ),
+        );
+	}
 }
