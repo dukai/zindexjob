@@ -24,7 +24,7 @@ class Module {
 		$member = $this->getLoginMember($secretKey, $sm);
 		$sm->setAllowOverride(true);
 		$sm->setService('loginMember', $member);
-		if($moduel == 'Admin'){
+		if($moduel == 'Admin' && empty($member)){
 			exit("Please login first");
 		}
 		
