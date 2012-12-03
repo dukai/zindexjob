@@ -4,7 +4,7 @@
  * to the application root now.
  */
 chdir(dirname(__DIR__));
-
+date_default_timezone_set('Asia/Shanghai');
 // Setup autoloading
 require 'init_autoloader.php';
 

@@ -2,6 +2,7 @@
 namespace Auth;
 use Zend\Mvc\MvcEvent;
 use Dk\RevCrypt;
+use Zend\Session\Container;
 class Module {
 	
 	public function onBootstrap($e){
@@ -17,15 +18,28 @@ class Module {
 		$pieces = explode('\\', $controller);
 		$moduel = $pieces[0];
 		$action = $matches->getParam('action');
-		$app = $e->getApplication();
-		$sm = $app->getServiceManager();
-		$config = $app->getConfig();
-		$secretKey = $config['secretkey'];
-		$member = $this->getLoginMember($secretKey, $sm);
-		$sm->setAllowOverride(true);
-		$sm->setService('loginMember', $member);
+		$session = new Container();
+		
+		if(!$session->offsetExists('loginMember')){
+			$app = $e->getApplication();
+			$sm = $app->getServiceManager();
+			$config = $app->getConfig();
+			$secretKey = $config['secretkey'];
+			$member = $this->getLoginMember($secretKey, $sm);
+			$sm->setAllowOverride(true);
+			$sm->setService('loginMember', $member);
+			$session->offsetSet('loginMember', $member);
+		}else{
+			$member = $session->offsetGet('loginMember');
+		}
+		
 		if($moduel == 'Admin' && empty($member)){
-			exit("Please login first");
+		 	$url = $e->getRouter()->assemble(array(), array('name' => 'auth_login'));
+            $response = $e->getResponse();
+            $response->getHeaders()->addHeaderLine('Location', $url);
+            $response->setStatusCode(302);
+            $response->sendHeaders();
+            exit;
 		}
 		
 		

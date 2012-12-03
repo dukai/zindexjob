@@ -30,6 +30,17 @@ return array(
                     ),
                 ),
             ),
+            
+			'auth_regist' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/regist',
+                    'defaults' => array(
+                        'controller' => 'Auth\Controller\Auth',
+                        'action'     => 'regist',
+                    ),
+                ),
+            ),
         ),
     ),
 	

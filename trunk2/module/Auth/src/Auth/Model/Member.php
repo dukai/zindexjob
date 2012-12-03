@@ -30,7 +30,7 @@ class Member extends ModelBase{
 		}
 		
 		if($orig){
-			if($this->member['password'] == md5($password)){
+			if($this->member['password'] ==md5(md5($password) . $this->member->salt)){
 				return true;
 			}else{
 				return false;
@@ -47,5 +47,26 @@ class Member extends ModelBase{
 	
 	public function getCurrentMember(){
 		return $this->member;
+	}
+	
+	public function save($data){
+		
+		if(empty($data['salt'])){
+			$salt = md5(date("y-m-d-H-i-s") . rand(0, 10000));
+			$salt = substr($salt, 4, 6);
+			$data['salt'] = $salt;
+		}else{
+			$salt = $data['salt'];
+		}
+		if(empty($data['password'])){
+			return false;
+		}
+		$password = md5($data['password']);
+		$password = md5($password . $salt);
+		$data['password'] =  $password;
+		if(empty($data['created_date'])){
+			$data['created_date'] = date("Y-m-d H:i:s");
+		}
+		return $this->simpleInsert($data);
 	}
 }

@@ -5,6 +5,7 @@ namespace Auth\Controller;
 use Dk\Mvc\Controller\ControllerBase;
 use Dk\RevCrypt;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class AuthController extends ControllerBase{
 	public function loginAction(){
@@ -47,6 +48,8 @@ class AuthController extends ControllerBase{
 			
 			$userInfo = array('uid'=>$member->uid, 'password'=>$member->password);
 			setCookie('auth', RevCrypt::encode(json_encode($userInfo), $secretKey), $cookieTime, '/', $cookieDomain);
+			$session = new Container();
+			$session->offsetSet('loginMember', $member);
 			$this->getEvent()->getApplication()->getServiceManager()->setService('loginMember', $member);			$this->flashMessenger()->addMessage('登录成功！');
 			return $this->redirect()->toUrl('/login');
 			
@@ -66,5 +69,52 @@ class AuthController extends ControllerBase{
 	
 	public function logoutAction(){
 		
+	}
+	
+	public function registAction(){
+		$memberModel = $this->getService('Auth/Model/Member');
+		
+		$memberModel->save(array());
+		$request = $this->getRequest();
+		
+		if($request->isPost()){
+			$data = $request->getPost()->getArrayCopy();
+			
+			if(empty($data['email'])){
+				$this->flashMessenger()->addMessage('电子邮箱不能为空');
+				return $this->redirect()->toUrl('/regist');
+			}
+			
+			if(empty($data['username'])){
+				$this->flashMessenger()->addMessage('用户名不能为空');
+				return $this->redirect()->toUrl('/regist');
+			}
+			
+			if(empty($data['password'])){
+				$this->flashMessenger()->addMessage('密码不能为空');
+				return $this->redirect()->toUrl('/regist');
+			}
+			
+			if(empty($data['repassword'])){
+				$this->flashMessenger()->addMessage('重复密码不能为空');
+				return $this->redirect()->toUrl('/regist');
+			}
+			
+			if($data['password'] != $data['repassword']){
+				$this->flashMessenger()->addMessage('密码不匹配');
+				return $this->redirect()->toUrl('/regist');
+			}
+			
+			
+			$memberModel = $this->getService('Auth/Model/Member');
+			
+			$memberModel->save($data);
+			
+			$this->flashMessenger()->addMessage('注册成功！');
+			return $this->redirect()->toUrl('/login');
+			
+		}else{
+			
+		}
 	}
 }
