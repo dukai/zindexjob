@@ -6,6 +6,7 @@ use Dk\Mvc\Controller\ControllerBase;
 use Dk\RevCrypt;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Auth\Model\Member;
 
 class AuthController extends ControllerBase{
 	public function loginAction(){
@@ -68,7 +69,13 @@ class AuthController extends ControllerBase{
 	}
 	
 	public function logoutAction(){
+		$config = $this->getConfig();
+		$cookieDomain = $config['cookiedomain'];
+		setCookie('auth', '', time()-1, '/', $cookieDomain);
+		$session = new Container();
 		
+		$session->offsetUnset(Member::AUTH_MEMBER_SESSION_NAME);
+		return $this->redirect()->toUrl('/job');
 	}
 	
 	public function registAction(){
