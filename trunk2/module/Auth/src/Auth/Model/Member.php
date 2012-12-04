@@ -6,6 +6,7 @@ use Dk\Mvc\Model\ModelBase;
 
 class Member extends ModelBase{
 	const TABLE_NAME = "members";
+	const AUTH_MEMBER_SESSION_NAME = 'login_member';
 	
 	private $member;
 	

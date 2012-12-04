@@ -3,6 +3,7 @@ namespace Auth;
 use Zend\Mvc\MvcEvent;
 use Dk\RevCrypt;
 use Zend\Session\Container;
+use Auth\Model\Member;
 class Module {
 	
 	public function onBootstrap($e){
@@ -18,20 +19,8 @@ class Module {
 		$pieces = explode('\\', $controller);
 		$moduel = $pieces[0];
 		$action = $matches->getParam('action');
-		$session = new Container();
 		
-		if(!$session->offsetExists('loginMember')){
-			$app = $e->getApplication();
-			$sm = $app->getServiceManager();
-			$config = $app->getConfig();
-			$secretKey = $config['secretkey'];
-			$member = $this->getLoginMember($secretKey, $sm);
-			$sm->setAllowOverride(true);
-			$sm->setService('loginMember', $member);
-			$session->offsetSet('loginMember', $member);
-		}else{
-			$member = $session->offsetGet('loginMember');
-		}
+		$member = $this->getAuthMember($e);
 		
 		if($moduel == 'Admin' && empty($member)){
 		 	$url = $e->getRouter()->assemble(array(), array('name' => 'auth_login'));
@@ -42,30 +31,36 @@ class Module {
             exit;
 		}
 		
-		
 	}
-	
-	private function getLoginMember($secretKey, $sm){
-		if(empty($_COOKIE['auth'])){
-			return null;
+
+
+	private function getAuthMember($event){
+		$session = new Container();
+		$member = array();
+		if($session->offsetExists(Member::AUTH_MEMBER_SESSION_NAME)){
+			$member = $session->offsetGet(Member::AUTH_MEMBER_SESSION_NAME);
 		}
-		$authStr = $_COOKIE['auth'];
-		if(empty($authStr)){
-			return null;
-		}
-		$authStr = RevCrypt::decode($authStr, $secretKey);
-		$auths = json_decode($authStr,true);
 		
-		
-		if(empty($auths) || !is_array($auths) || !array_key_exists('uid',$auths) || !array_key_exists('password',$auths)){
-			return null;
+		if(empty($member) && !empty($_COOKIE['auth'])){
+			$app = $event->getApplication();
+			$sm = $app->getServiceManager();
+			$config = $app->getConfig();
+			$secretKey = $config['secretkey'];
+			
+			$authStr = RevCrypt::decode($_COOKIE['auth'], $secretKey);
+			$auths = json_decode($authStr,true);
+			
+			if(!empty($auths) && is_array($auths) && array_key_exists('uid',$auths) && array_key_exists('password',$auths)){
+				$memberModel = $sm->get('Auth\Model\Member');
+				if($memberModel->checkExistByUid($auths['uid']) && $memberModel->checkPassword($auths['password'], FALSE)){
+					$member = $memberModel->getCurrentMember();
+				}
+			}
+			
+			$session->offsetSet(Member::AUTH_MEMBER_SESSION_NAME, $member);
 		}
-		$memberModel = $sm->get('Auth\Model\Member');
 		
-		if(!$memberModel->checkExistByUid($auths['uid']) || !$memberModel->checkPassword($auths['password'], false)){
-			return null;
-		}
-		return $memberModel->getCurrentMember();
+		return $member;
 	}
 	
 	public function setLayout($e){
@@ -81,19 +76,11 @@ class Module {
 	}
 	
 	public function setUserToView($e){
-		$sm = $e->getApplication()->getServiceManager();
-		if($sm->has('loginMember')){
-			$member = $sm->get('loginMember');
-		}else{
-			$member = array();
-		}
-		
+		$member = $this->getAuthMember($e);
         $viewModel = $e->getViewModel();
-		
         $viewModel->setVariables(array(
             'member' => $member,
         ));
-		
 	}
 	
 	public function getConfig() {
