@@ -21,8 +21,9 @@ class Module {
 		$action = $matches->getParam('action');
 		
 		$member = $this->getAuthMember($e);
-		
-		if($moduel == 'Admin' && empty($member)){
+		if($moduel == 'Admin' && (empty($member) || (!empty($member) && !$member->valid ))){
+			$fm = $e->getApplication()->getServiceManager()->get('ControllerPluginManager')->get('flashmessenger');
+			$fm->addMessage('未登录或用户已被禁用，请先登录或联系管理员');
 		 	$url = $e->getRouter()->assemble(array(), array('name' => 'auth_login'));
             $response = $e->getResponse();
             $response->getHeaders()->addHeaderLine('Location', $url);
