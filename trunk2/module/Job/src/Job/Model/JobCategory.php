@@ -20,4 +20,8 @@ class JobCategory extends ModelBase{
 		}
 		return $this->simpleFetch("select * from " . self::TABLE_NAME . $limit);
 	}
+	
+	public function getJobCategory($id){
+		return $this->query("select * from " . self::TABLE_NAME . " where jc_id={$id}")->current();
+	}
 }

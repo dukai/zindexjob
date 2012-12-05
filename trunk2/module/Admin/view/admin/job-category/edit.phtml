@@ -1,15 +1,22 @@
-			<h1 class="page-header">编辑公司性质</h1>
+			<h1 class="page-header">编辑工作分类</h1>
 			<?if(isset($messages)){?>
 			<?=$this->messager($messages)?>
 			<?}?>
 			<section>
 				<form method="post" class="form-horizontal">
-					<legend>公司性质信息</legend>
+					<legend>工作分类信息</legend>
 					
 					<div class="control-group">
 						<label class="control-label" for="username">名称</label>
 						<div class="controls">
-							<input type="text" name="name" id="name" placeholder="名称" value="<?=$nature->name?>" />
+							<input type="text" name="name" id="name" placeholder="名称" value="<?=$category->name?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="username">描述</label>
+						<div class="controls">
+							<textarea name="description" id="description" placeholder="描述" class="span6"><?=$category->description?></textarea>
 						</div>
 					</div>
 					

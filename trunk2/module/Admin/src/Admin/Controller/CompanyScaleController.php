@@ -41,4 +41,35 @@ class CompanyScaleController extends ControllerBase{
 			return new ViewModel($returnArray);
 		}
 	}
+	
+	public function editAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		$request = $this->getRequest();
+		$model = $this->getService('Job\Model\CompanyScale');
+		
+		if($request->isPost()){
+			$model->simpleUpdate($request->getPost()->getArrayCopy(), array('id'=>$id));
+			$this->flashMessenger()->addMessage('创建成功！');
+			return $this->redirect()->toUrl('/admin/company-scale/edit?id=' . $id);
+		}else{
+			$scale = $model->getCompanyScale($id);
+			
+			$returnArray = array(
+				'scale' => $scale,
+			);
+			
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			
+			return new ViewModel($returnArray);
+		}
+	}
+	
+	public function deleteAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		$model = $this->getService('Job\Model\CompanyScale');
+		$model->simpleDelete(array('id' => $id));
+		return $this->redirect()->toUrl('/admin/company-scale');
+	}
 }

@@ -49,10 +49,32 @@ class JobCategoryController extends ControllerBase{
 	}
 	
 	public function editAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		$request = $this->getRequest();
+		$model = $this->getService('Job\Model\JobCategory');
 		
+		if($request->isPost()){
+			$model->simpleUpdate($request->getPost()->getArrayCopy(), array('jc_id'=>$id));
+			$this->flashMessenger()->addMessage('编辑成功！');
+			return $this->redirect()->toUrl('/admin/job-category/edit?id=' . $id);
+		}else{
+			$category = $model->getJobCategory($id);
+			$returnArray = array(
+				'category' => $category,
+			);
+			
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			
+			return new ViewModel($returnArray);
+		}
 	}
 	
 	public function deleteAction(){
-		
+		$id = intval($this->params()->fromQuery('id', 0));
+		$model = $this->getService('Job\Model\JobCategory');
+		$model->simpleDelete(array('jc_id' => $id));
+		return $this->redirect()->toUrl('/admin/job-category');
 	}
 }

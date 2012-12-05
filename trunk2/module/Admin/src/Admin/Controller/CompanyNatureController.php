@@ -52,7 +52,7 @@ class CompanyNatureController extends ControllerBase{
 			$this->flashMessenger()->addMessage('创建成功！');
 			return $this->redirect()->toUrl('/admin/company-nature/edit?id=' . $id);
 		}else{
-			$nature = $model->getCompanyIndustry($id);
+			$nature = $model->getCompanyNature($id);
 			$returnArray = array(
 				'nature' => $nature,
 			);
