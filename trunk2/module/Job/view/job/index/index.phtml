@@ -1,25 +1,58 @@
 <?foreach($companies as $company){?>
 <article class="jobs">
-	<div class="h1"><?=$company['name']?></div>
+	<h1 class="h1"><?=$company['name']?></h1>
 	<ul>
-		<li><h3>公司简介</h3><div><?=$company['description']?></div></li>
-		<li><h3>公司地址</h3><div><?=$company['address']?></div></li>
+		<li>
+			<h2>公司概况</h2>
+			<ul>
+				<li>
+					<h2>公司简介</h2><div><?=$company['description']?></div>
+				</li>
+				<li><h3>公司地址</h3><div><?=$company['address']?></div></li>
+				<li></li>
+			</ul>
+			
+			
+			
+		</li>
+		
 	
 	
 		<li>
-		<h3>工作</h3>
+		<h2>工作</h2>
 		<?if(isset($tjobs[$company['company_id']])){foreach( $tjobs[$company['company_id']] as $tj){?>
 		
-		<dl>
-			<dt><?=$tj['title']?></dt>
-			<dd><?=$tj['pay']?></dd>
-			<dd><?=$tj['treatment']?></dd>
-			<dd><?=$tj['duty']?></dd>
-			<dd><?=$tj['requirement']?></dd>
-		</dl>
+		<ul>
+			<li><h3><?=str_replace("\r\n", '<br />', $tj['title'])?></h3></li>
+			<li>
+				<h4>薪资</h4>
+				<div><?=str_replace("\r\n", '<br />', $tj['pay'])?></div>
+			</li>
+			<li>
+				<h4>待遇</h4>
+				<div><?=str_replace("\r\n", '<br />', $tj['treatment'])?></div></li>
+			<li>
+				<h4>职责</h4>
+				<div><?=str_replace("\r\n", '<br />', $tj['duty'])?></div></li>
+			<li>
+				<h4>要求</h4>
+				<div><?=str_replace("\r\n", '<br />', $tj['requirement'])?></div></li>
+		</ul>
 		<?}}else{?>
 		暂无工作信息
 		<?}?>
+		</li>
+		<li>
+			<h2>联系人</h2>
+			<?if(isset($tusers[$company['company_id']])){
+				foreach($tusers[$company['company_id']] as $tu){?>
+			<ul>
+				<li>名字:<?=$tu['username']?></li>
+				
+			</ul>
+				<?}
+			}?>
+			
 		</li>
 	</ul>
 </article>

@@ -1,6 +1,4 @@
 body {
-    padding-top: 60px;
-    padding-bottom: 40px;
 }
 
 .zf-green {
@@ -35,3 +33,25 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+
+body,td,th {
+	font-family: "微软雅黑", Geneva, sans-serif;
+	font-size: 12px;
+	line-height:18px;
+	color: #5d6871;
+	background-color: #f4f6f8;
+	margin: 0px;
+	text-align:center;
+}
+.content {}
+header {width:960px; height:88px; padding:0 20px; font-size:36px; font-weight:bold; color:#8a3c90; border-bottom:1px solid #e5e5e5;margin:0 auto;line-height:88px;}
+.words {width:960px; height:60px; padding:0 16px;   border-top:1px solid #f9f9f9; border-bottom:1px solid #e5e5e5;margin:0 auto;}
+.jobs {width:960px; height: auto; padding:16px;  border-top:1px solid #f9f9f9; border-bottom:1px solid #e5e5e5; background:#fff; margin-bottom:8px;margin: 0 auto;text-align: left;}
+.h6 {font-size:14px; font-weight:bold; line-height:18px; color:#fd6637;}
+h1{font-size:20px; font-weight:bold; line-height:18px; color:#0bafc8;}
+h2 {font-size:16px; font-weight:bold; line-height:18px; color:#0bafc8;}
+h3 {font-size:14px; font-weight:bold; line-height:18px; color:#8a3c90;}
+
+ul, li{list-style: none;margin:0;padding:0;}
+h4{margin:0;padding:0;}

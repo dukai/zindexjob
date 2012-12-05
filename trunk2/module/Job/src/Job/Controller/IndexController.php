@@ -24,6 +24,7 @@ class IndexController extends AbstractActionController{
 		$idstring = implode("','", $companyIds);
 		$idstring = "'" . $idstring . "'";
 		$result = $adapter->query("select * from jobs where company_id in ({$idstring})", Adapter::QUERY_MODE_EXECUTE);
+		$contactUsers = $adapter->query("select c.*, r.company_id as company_id from contact_users as c left join company_contactuser_rel as r on c.uid=r.uid where r.company_id in ({$idstring})", Adapter::QUERY_MODE_EXECUTE)->toArray();
 		//$jobs = $result->toArray();
 		$jobs = array();
 		while($c = $result->current()){
@@ -38,9 +39,19 @@ class IndexController extends AbstractActionController{
 			}
 			$tjobs[$value['company_id']][] = $value;
 		}
+		
+		$tusers = array();
+		
+		foreach($contactUsers as $key=>$value){
+			if(!isset($tusers[$value['company_id']])){
+				$tusers[$value['company_id']] = array();
+			}
+			$tusers[$value['company_id']][] = $value;
+		}
 		return new ViewModel(array(
 			'companies' => $companies,
 			'tjobs' => $tjobs,
+			'tusers' => $tusers,
 		));
 	}
 }
