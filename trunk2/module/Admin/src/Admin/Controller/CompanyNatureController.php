@@ -41,4 +41,33 @@ class CompanyNatureController extends ControllerBase{
 			return new ViewModel($returnArray);
 		}
 	}
+	
+	public function editAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		$request = $this->getRequest();
+		
+		$model = $this->getService('Job\Model\CompanyNature');
+		if($request->isPost()){
+			$model->simpleUpdate($request->getPost()->getArrayCopy(), array('id'=>$id));
+			$this->flashMessenger()->addMessage('创建成功！');
+			return $this->redirect()->toUrl('/admin/company-nature/edit?id=' . $id);
+		}else{
+			$nature = $model->getCompanyIndustry($id);
+			$returnArray = array(
+				'nature' => $nature,
+			);
+			if($this->flashMessenger()->hasMessages()){
+				$returnArray['messages'] = $this->flashMessenger()->getMessages();
+			}
+			
+			return new ViewModel($returnArray);
+		}
+	}
+	
+	public function deleteAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		$model = $this->getService('Job\Model\CompanyNature');
+		$model->simpleDelete(array('id' => $id));
+		return $this->redirect()->toUrl('/admin/company-nature');
+	}
 }

@@ -19,4 +19,8 @@ class CompanyIndustry extends ModelBase{
 		}
 		return $this->simpleFetch("select * from " . self::TABLE_NAME . $limit);
 	}
+	
+	public function getCompanyIndustry($id){
+		return $this->query("select * from " . self::TABLE_NAME . " where id={$id}")->current();
+	}
 }
