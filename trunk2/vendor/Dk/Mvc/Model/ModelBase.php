@@ -77,6 +77,13 @@ class ModelBase{
 		return $this->query($update->getSqlString($this->adapter->getPlatform()));
 	}
 	
+	public function simpleDelete($where){
+		$sql = new Sql($this->adapter);
+		$delete = $sql->delete($this->tableName);
+		$delete->where($where);
+		return $this->query($delete->getSqlString($this->adapter->getPlatform()));
+	}
+	
 	public function getLastId(){
 		return $this->adapter->getDriver()->getLastGeneratedValue();
 	}

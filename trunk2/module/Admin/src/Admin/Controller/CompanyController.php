@@ -85,4 +85,12 @@ class CompanyController extends ControllerBase{
 			return  new ViewModel($returnArray);
 		}
 	}
+
+	public function deleteAction(){
+		$id = intval($this->params()->fromQuery('id', 0));
+		
+		$companyModel = $this->getService('Job\Model\Company');
+		$companyModel->simpleDelete(array('company_id'=>$id));
+		return $this->redirect()->toUrl('/admin/company');
+	}
 }

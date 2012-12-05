@@ -26,15 +26,19 @@ class AuthController extends ControllerBase{
 				return $this->redirect()->toUrl('/login');
 			}
 			if(!$memberModel->checkExistByUsername($username)){
-				$this->flashMessenger()->addMessage('用户名密码错误1！');
+				$this->flashMessenger()->addMessage('用户名密码错误！');
 				return $this->redirect()->toUrl('/login');
 			}
 			
 			if(!$memberModel->checkPassword($password)){
-				$this->flashMessenger()->addMessage('用户名密码错误2！');
+				$this->flashMessenger()->addMessage('用户名密码错误！');
 				return $this->redirect()->toUrl('/login');
 			}
 			$member = $memberModel->getCurrentMember();
+			if(!$member->valid){
+				$this->flashMessenger()->addMessage('用户已停用！');
+				return $this->redirect()->toUrl('/login');
+			}
 			$config = $this->getConfig();
 			$secretKey = $config['secretkey'];
 			$cookieDomain = $config['cookiedomain'];
@@ -50,8 +54,9 @@ class AuthController extends ControllerBase{
 			$userInfo = array('uid'=>$member->uid, 'password'=>$member->password);
 			setCookie('auth', RevCrypt::encode(json_encode($userInfo), $secretKey), $cookieTime, '/', $cookieDomain);
 			$session = new Container();
-			$session->offsetSet('loginMember', $member);
-			$this->getEvent()->getApplication()->getServiceManager()->setService('loginMember', $member);			$this->flashMessenger()->addMessage('登录成功！');
+			$session->offsetSet(Member::AUTH_MEMBER_SESSION_NAME, $member);
+			$this->getEvent()->getApplication()->getServiceManager()->setService('loginMember', $member);
+			$this->flashMessenger()->addMessage('登录成功！');
 			return $this->redirect()->toUrl('/login');
 			
 		}else{

@@ -22,6 +22,7 @@ class Member extends ModelBase{
 	
 	public function checkExistByUid($uid){
 		$this->member = $this->fetchRow("select * from " . self::TABLE_NAME . " where uid='{$uid}'");
+		print_r($this->member);exit;
 		return !empty($this->member);
 	}
 	

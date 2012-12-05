@@ -27,7 +27,12 @@
 						<td><?=$value['name']?></td>
 						<td><?=$value['created_time']?></td>
 						<td><div class="btn-group"><a href="#" class="btn btn-primary btn-small">新增工作</a><a href="#" class="btn btn-success btn-small">新增联系人</a></div></td>
-						<td><div class="btn-group"><a href="/admin/company/edit?id=<?=$value['company_id']?>" class="btn btn-primary btn-small">修改</a><a href="#" class="btn btn-danger btn-small">删除</a></div></td>
+						<td>
+							<div class="btn-group">
+								<a href="/admin/company/edit?id=<?=$value['company_id']?>" class="btn btn-primary btn-small">修改</a>
+								<a href="/admin/company/delete?id=<?=$value['company_id']?>" class="btn btn-danger btn-small delete">删除</a>
+							</div>
+						</td>
 					</tr>
 					<?}?>
 				</table>
@@ -36,3 +41,16 @@
 					<?=$pager?>
 				</div>
 			</section>
+			<script>
+			$(function(){
+				$('a.delete').click(function(e){
+					if(confirm('确定删除？')){
+						return true;
+					}
+					
+					return false;
+				});
+			});
+			
+				
+			</script>
