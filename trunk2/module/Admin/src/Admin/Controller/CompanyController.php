@@ -92,5 +92,7 @@ class CompanyController extends ControllerBase{
 		$companyModel = $this->getService('Job\Model\Company');
 		$companyModel->simpleDelete(array('company_id'=>$id));
 		return $this->redirect()->toUrl('/admin/company');
+		
+		//TODO: 删除相关信息
 	}
 }

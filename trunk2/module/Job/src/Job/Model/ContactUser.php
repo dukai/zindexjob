@@ -23,4 +23,8 @@ class ContactUser extends ModelBase{
 	public function addCompanyRel($companyId, $uid){
 		return $this->query("insert into company_contactuser_rel (company_id, uid) values ('$companyId', '$uid')");
 	}
+	
+	public function getContactUser($id){
+		return $this->query("select cu.*, c.name as company_name, c.company_id as company_id from " . self::TABLE_NAME . " as cu left join company_contactuser_rel as r on cu.uid=r.uid left join companies as c on r.company_id=c.company_id where cu.uid={$id}")->current();
+	}
 }

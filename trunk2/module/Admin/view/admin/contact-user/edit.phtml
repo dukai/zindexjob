@@ -1,0 +1,80 @@
+			<h1 class="page-header">创建联系人</h1>
+			<?if(isset($messages)){?>
+			<?=$this->messager($messages)?>
+			<?}?>
+			<section>
+				<form method="post" class="form-horizontal">
+					<legend>联系人信息</legend>
+					
+					<div class="control-group">
+						<label class="control-label" for="username">公司</label>
+						<div class="controls">
+							<?=$this->company_selector($companies, $user->company_id)?>
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="username">用户名</label>
+						<div class="controls">
+							<input type="text" name="username" id="username" placeholder="用户名" value="<?=$user->username?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="email">电子邮件</label>
+						<div class="controls">
+							<input type="text" name="email" id="email" placeholder="电子邮件" value="<?=$user->email?>" />
+						</div>
+					</div>
+					
+					
+					
+					<div class="control-group">
+						<label class="control-label" for="address">地址</label>
+						<div class="controls">
+							<input type="text" name="address" id="address" placeholder="地址" value="<?=$user->address?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="cellphone">移动电话</label>
+						<div class="controls">
+							<input type="text" name="cellphone" id="cellphone" placeholder="移动电话" value="<?=$user->cellphone?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="phone">固定电话</label>
+						<div class="controls">
+							<input type="text" name="phone" id="phone" placeholder="固定电话" value="<?=$user->phone?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="qq">QQ</label>
+						<div class="controls">
+							<input type="text" name="qq" id="qq" placeholder="QQ" value="<?=$user->qq?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="gtalk">gtalk</label>
+						<div class="controls">
+							<input type="text" name="gtalk" id="gtalk" placeholder="gtalk" value="<?=$user->gtalk?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<label class="control-label" for="msn">MSN</label>
+						<div class="controls">
+							<input type="text" name="msn" id="msn" placeholder="MSN" value="<?=$user->msn?>" />
+						</div>
+					</div>
+					
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" name="submit" value="提交" class="btn btn-primary" />
+						</div>
+					</div>
+				</form>
+			</section>
