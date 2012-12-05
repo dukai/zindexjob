@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `companies` (
   `fax` varchar(20) NOT NULL,
   `zipcode` varchar(10) NOT NULL,
   `website` varchar(200) NOT NULL,
-  `scale` varchar(20) NOT NULL COMMENT 'πÊƒ£',
-  `nature` varchar(20) NOT NULL COMMENT '∆Û“µ–‘÷ ',
-  `industry` varchar(20) NOT NULL COMMENT 'À˘ Ù––“µ',
+  `scale` varchar(20) NOT NULL COMMENT 'ËßÑÊ®°',
+  `nature` varchar(20) NOT NULL COMMENT '‰ºÅ‰∏öÊÄßË¥®',
+  `industry` varchar(20) NOT NULL COMMENT 'ÊâÄÂ±ûË°å‰∏ö',
   PRIMARY KEY (`company_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
@@ -140,10 +140,10 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `job_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `address` varchar(200) NOT NULL,
-  `pay` varchar(20) NOT NULL COMMENT 'π§◊ ',
-  `treatment` text NOT NULL COMMENT '¥˝”ˆ',
-  `duty` text NOT NULL COMMENT '÷∞‘',
-  `requirement` text NOT NULL COMMENT '“™«Û',
+  `pay` varchar(20) NOT NULL COMMENT 'Â∑•ËµÑ',
+  `treatment` text NOT NULL COMMENT 'ÂæÖÈÅá',
+  `duty` text NOT NULL COMMENT 'ËÅåË¥£',
+  `requirement` text NOT NULL COMMENT 'Ë¶ÅÊ±Ç',
   `person_number` varchar(100) NOT NULL,
   `created_time` datetime NOT NULL,
   `company_id` int(11) NOT NULL,
