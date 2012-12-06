@@ -34,6 +34,8 @@ class CompanyController extends ControllerBase{
 		if($request->isPost()){
 			
 			$company = new Company($this->getAdapter());
+			$data = $request->getPost()->getArrayCopy();
+			$data['created_time'] = date("Y-m-d H:i:s");
 			$company->simpleInsert($request->getPost()->getArrayCopy());
 			$this->flashMessenger()->addMessage('创建成功！');
 			return $this->redirect()->toUrl('/admin/company/create');
