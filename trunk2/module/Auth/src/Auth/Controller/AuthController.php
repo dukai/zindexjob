@@ -119,6 +119,7 @@ class AuthController extends ControllerBase{
 			
 			
 			$memberModel = $this->getService('Auth/Model/Member');
+			$data['created_time'] = date("Y-m-d H:i:s");
 			
 			$memberModel->save($data);
 			
