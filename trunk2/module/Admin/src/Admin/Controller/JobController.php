@@ -36,7 +36,9 @@ class JobController extends ControllerBase{
 		if($request->isPost()){
 			
 			$job = new Job($this->getAdapter());
-			$job->simpleInsert($request->getPost()->getArrayCopy());
+			$data = $request->getPost()->getArrayCopy();
+			$data['created_time'] = date("Y-m-d H:i:s");
+			$job->simpleInsert($data);
 			$this->flashMessenger()->addMessage('创建成功！');
 			return $this->redirect()->toUrl('/admin/job/create');
 		}else{
